@@ -6,11 +6,9 @@ import products from '../assets/products.json'
 export const ShopContext =createContext();
 
 
-const getDefaultCart =()=>{  // 1   0
-    
-
+const getDefaultCart =()=>{ 
     let cart ={}
-    products.forEach((product)=>{
+    products.products.forEach((product)=>{
         cart[product.id]=0
     })
     return cart
@@ -23,7 +21,7 @@ export const ShopContextProvider =(props) =>{
     let total =0
     for(let item in cartItems){
         if(cartItems[item] >0){
-            let itmefound =products.find((product)=> product.id === Number(item))
+            let itmefound =products.products.find((product)=> product.id === Number(item))
             total += (itmefound.price *cartItems[item])
         }
     }
