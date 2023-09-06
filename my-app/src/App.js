@@ -5,8 +5,10 @@ import {ShopContextProvider} from './context/shop-context.jsx'
 import ContactUs from './component/contactUs.jsx'
 
 
-function App() {
 
+
+
+function App() {
 
   return (
 
@@ -14,13 +16,12 @@ function App() {
     <ShopContextProvider>
       <BrowserRouter>
         <Routes>
-        
           <Route path="/cart" element={<Cart />} />
           <Route path="/contactUs"  element={<ContactUs/>} />
         </Routes>
       </BrowserRouter>
     </ShopContextProvider>
-  </div>
+  </div> 
   );
 }
 

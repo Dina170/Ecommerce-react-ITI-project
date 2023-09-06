@@ -20,7 +20,7 @@ function Cart(){
         <div>
             <h1>Your cart items</h1> 
         <div className='cart'>
-            {products.map((product)=>{
+            {products.products.map((product)=>{
                 if(cartItems[product.id] >0){
                     return(
                         <CartItem data ={product} />
