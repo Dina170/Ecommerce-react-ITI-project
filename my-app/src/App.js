@@ -9,6 +9,8 @@ import Cart from "./components/cart.jsx";
 //import { ShopContextProvider } from "./context/shop-context.jsx";
 import ContactUs from "./components/contactUs.jsx";
 import MainLayout from "./Admin/Main";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -30,6 +32,8 @@ function App() {
         <Route path="Dashboard/*" element={<MainLayout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/contactUs" element={<ContactUs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
     </div>
   );

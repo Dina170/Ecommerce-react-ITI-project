@@ -27,7 +27,7 @@ export const ProductContextProvider = ({ children }) => {
     return total;
   };
 
-  let [cartItems, setCartItems] = useState(getDefaultCart());
+  let [cartItems, setCartItems] = useState({});
   const addToCart = (itemId) => {
     console.log("cartItems", cartItems);
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
@@ -48,7 +48,10 @@ export const ProductContextProvider = ({ children }) => {
   const getProducts = () => {
     fetch(api_url)
       .then((res) => res.json())
-      .then((data) => setProducts(data));
+      .then((data) => {
+        setProducts(data);
+        //setCartItems(getDefaultCart());
+      });
     console.log("products in context", products);
   };
 
@@ -56,20 +59,13 @@ export const ProductContextProvider = ({ children }) => {
     fetch(`${api_url}/categories`)
       .then((res) => res.json())
       .then((data) => {
-        //console.log("prod in getcat", products);
-        //let tmp = [];
-        for (let i = 0; i < data.length; i++) {
-          let c = {
-            categoryName: data[i],
-            description: "predefined",
-            status: "0",
-            // products.filter((p) => p.category === data[i]).length,
-          };
-          categories.push(c);
-        }
-        //console.log("tmp", tmp);
-        setCategories(categories);
-        console.log("cats", categories);
+        const updatedCategories = data.map((category) => ({
+          categoryName: category,
+          description: "predefined",
+          status: "0",
+        }));
+        setCategories(updatedCategories);
+        console.log("categories in context", updatedCategories);
       });
   };
 
@@ -77,6 +73,12 @@ export const ProductContextProvider = ({ children }) => {
     getProducts();
     getCategories();
   }, []);
+
+  useEffect(() => {
+    if (products.length > 0) {
+      setCartItems(getDefaultCart());
+    }
+  }, [products]);
 
   const contextValues = {
     cartItems,
