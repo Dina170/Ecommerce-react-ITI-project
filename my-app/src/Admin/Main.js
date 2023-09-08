@@ -39,7 +39,6 @@ function MainLayout() {
   const deleteProdHandler = (_index) => {
     if (window.confirm("Are You Sure?")) {
       products.splice(_index, 1);
-      //console.log("prod after delete", products);
       setProducts(products);
       _navigate("/Dashboard/ListProducts");
     }
@@ -66,7 +65,6 @@ function MainLayout() {
   const deleteCatHandler = (_index) => {
     if (window.confirm("Are You Sure?")) {
       categories.splice(_index, 1);
-      //console.log("prod after delete", products);
       setCategories(categories);
       _navigate("/Dashboard/ListCategories");
     }
