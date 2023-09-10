@@ -22,8 +22,13 @@ const Register = () => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      setFormErrors(validate(formValues));
-      setIsSubmit(true);
+    const newUser = { ...formValues };
+    const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+    registeredUsers.push(newUser);
+    localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+    setFormValues(initialValues);
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
     };
   
     useEffect(() => {
@@ -51,13 +56,13 @@ const Register = () => {
       } else if (!regex.test(values.email)) {
         errors.email = "This is not a valid email format!";
       }
-      if(!values.phone){
-        errors.phone = "phone number is required!";
-      }
-      else if(values.phone.length<11){
-        errors.phone = "Phone number must be equal 11 numbers";
+      // if(!values.phone){
+      //   errors.phone = "phone number is required!";
+      // }
+      // else if(values.phone.length<11){
+      //   errors.phone = "Phone number must be equal 11 numbers";
 
-      }
+      // }
       if (!values.password) {
         errors.password = "Password is required";
       } else if (values.password.length < 4) {
@@ -109,7 +114,7 @@ const Register = () => {
       </div>
       <p className="text-danger">{formErrors.email}</p>
 
-      <div className="input-box">
+      {/* <div className="input-box">
             <input
               type="text"
               name="Phone"
@@ -120,7 +125,7 @@ const Register = () => {
             />
             <FaPhone className="icon" />
 
-      </div>
+      </div> */}
       <p className="text-danger">{formErrors.phone}</p>
                   
       

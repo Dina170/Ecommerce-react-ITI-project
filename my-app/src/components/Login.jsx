@@ -13,6 +13,7 @@ const Login = () => {
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const inputValue = type === "checkbox" ? checked : value;
@@ -23,6 +24,11 @@ const Login = () => {
     e.preventDefault();
     setFormErrors(validate(formValues));
     if (Object.keys(formErrors).length === 0) {
+      const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      const user = registeredUsers.find(
+        (u) => u.username === formValues.username && u.password === formValues.password
+      );
+      if (user) {
       if (formValues.rememberMe) {
         localStorage.setItem("loggedInUser", JSON.stringify(formValues));
       } else {
@@ -30,7 +36,12 @@ const Login = () => {
       }
       setIsSubmit(true);
     }
-  };
+    else {
+      setFormErrors({ username: "Invalid username or password" });
+    }
+   
+}
+  }
 
   useEffect(() => {
     const storedUser = localStorage.getItem("loggedInUser");
@@ -38,6 +49,7 @@ const Login = () => {
       setFormValues(JSON.parse(storedUser));
     }
   }, []);
+  
   
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
