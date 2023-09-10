@@ -1,41 +1,36 @@
-import { useContext} from "react"
-import {ShopContext} from "../context/shop-context"
+import { useContext } from "react";
+import { ProductContext } from "../Admin/ProductContext";
+//import {ShopContext} from "../context/shop-context"
 
-import './cart.css'
+import "./cart.css";
 
+let CartItem = (props) => {
+  let { category, id, image, price, title } = props.data;
+  let { cartItems, addToCart, removeFromCart, updateAmount } =
+    useContext(ProductContext);
 
-
-let CartItem =(props)=>{
-    let {category ,id ,images ,price ,title} =props.data
-    let { cartItems, addToCart, removeFromCart, updateAmount} =useContext(ShopContext)
-    console.log(images[0])
-
-
-    return(
-        <div className="cartItem">
+  return (
+    <div className="cartItem">
+      <div>
         <div>
-            <div><img src={images[0]} alt="product image"/></div>
-            <div>{category}</div>
-            <div>{title}</div>
-            <div>Total price :$ {price * cartItems[id]}</div>
+          <img src={image} alt="product" />
         </div>
-        <div>
-            <button onClick={()=>addToCart(id)}>+</button>
-            <input value ={cartItems[id]} onChange={(e)=>{updateAmount(Number(e.target.value),id)}}/>
-            <button onClick={()=>removeFromCart(id)}>-</button>
-        </div>
-        </div>
+        <div>{category}</div>
+        <div>{title}</div>
+        <div>Total price :$ {price * cartItems[id]}</div>
+      </div>
+      <div>
+        <button onClick={() => addToCart(id)}>+</button>
+        <input
+          value={cartItems[id]}
+          onClick={(e) => {
+            updateAmount(Number(e.target.value), id);
+          }}
+        />
+        <button onClick={() => removeFromCart(id)}>-</button>
+      </div>
+    </div>
+  );
+};
 
-
-
-    )
-
-
-
-   
-
-}
-
-
-
-export default CartItem
+export default CartItem;

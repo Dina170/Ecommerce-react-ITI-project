@@ -1,37 +1,28 @@
 import { useEffect, useState, useContext } from "react";
 import Product from "./Product";
-import productsdata from "../data.json";
+//import productsdata from "../data.json";
 import { ProductContext } from "../Admin/ProductContext";
 
 export default function Gallary() {
-  const api_url = "https://fakestoreapi.com/products";
+  //const api_url = "https://fakestoreapi.com/products";
   const { products, setProducts } = useContext(ProductContext);
-  const [categories, setCategories] = useState([]);
+  const { categories, setCategories } = useContext(ProductContext);
+  const [gallaryProd, setGallaryProd] = useState([]);
 
-  const getProducts = () => {
-    fetch(api_url)
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
-    setProducts(productsdata);
-    console.log("products in gallary", products);
-  };
-
-  const getCategories = () => {
-    fetch(`${api_url}/categories`)
-      .then((res) => res.json())
-      .then((data) => setCategories(data));
+  const getAllProducts = () => {
+    setGallaryProd(products);
   };
 
   const getProductInCategory = (catName) => {
-    console.log(catName);
-    fetch(`${api_url}/category/${catName}`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+    let productsInCat = products.filter(
+      (product) => product.category === catName
+    );
+    console.log("productsInCat", productsInCat);
+    setGallaryProd(productsInCat);
   };
 
   useEffect(() => {
-    //getProducts();
-    getCategories();
+    getAllProducts();
   }, []);
 
   return (
@@ -40,7 +31,7 @@ export default function Gallary() {
       <div className="container">
         <button
           onClick={() => {
-            getProducts();
+            getAllProducts();
           }}
           className="btn btn-outline-secondary m-2"
         >
@@ -49,26 +40,27 @@ export default function Gallary() {
         {categories.map((cat) => {
           return (
             <button
-              key={cat}
+              key={cat.id}
               onClick={() => {
-                getProductInCategory(cat);
+                getProductInCategory(cat.categoryName);
               }}
               className="btn btn-outline-secondary m-2"
             >
-              {cat}
+              {cat.categoryName}
             </button>
           );
         })}
         <div className="row">
-          {products.map((product) => {
+          {gallaryProd.map((product) => {
             return (
               <div className="col-3 my-3" key={product.id}>
                 <Product product={product} showDetailsBtn={true} />
               </div>
             );
           })}
+          {/* {console.log("the products gallary", gallaryProd[5])}
           {console.log("the products", products[0])}
-          {console.log("the products type ", typeof products)}
+          {console.log("the products type ", typeof gallaryProd)} */}
         </div>
       </div>
     </>
