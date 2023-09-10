@@ -1,0 +1,76 @@
+
+
+
+.cart {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items:flex-start;
+}
+
+.cartItem {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: space-evenly;
+  box-shadow: 0px 3px 15px #0f2c59 ;
+  border-radius: 25px;
+  margin: 30px;
+  background-color: white;
+}
+
+.cartItem img {
+  width: 100px;
+  height: 100px;
+}
+
+.cartItem .description {
+
+}
+
+.countHandler{
+  margin-top: 5px;
+}
+.countHandler input {
+  border: none;
+  width: 60px;
+  text-align: center;
+  font-weight: bolder;
+  color:#0f2c59;
+  background-color:#f8f0e5;
+}
+
+.countHandler button {
+  width: 30px;
+  height: 30px;
+  background-color:#0f2c59 ;
+  color: #dac0a3;
+  font-weight: bold;
+  text-align: center;
+  border: solid 1px;
+  border-radius: 5px;
+}
+
+.btnFooter button{
+  background-color: #0f2c59;
+  margin: 10px;
+  height: 50px;
+  width: 250px;
+  color: #dac0a3;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0px 3px 15px #f8f0e5
+}
+
+.disabledbtn{
+  opacity: 0.5;
+}
+.emptyCart{
+  margin-top: 10px;
+ 
+}

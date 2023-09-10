@@ -4,6 +4,7 @@ import { faTwitter, faFacebook ,faInstagram ,faLinkedin } from '@fortawesome/fre
 import {faLocationDot,faPhone,faMobile} from '@fortawesome/free-solid-svg-icons'
 import {useRef} from 'react'
 import emailjs from '@emailjs/browser';
+import './contact.css'
 
 
 
@@ -11,6 +12,7 @@ function ContactUs(){
   const form =useRef()
   const sendEmail = (e) => {
     e.preventDefault();
+    console.log(form.current);
 
     emailjs.sendForm('service_0kyj6bk', 'template_am7u99p', form.current, 'IH3VizxuFCrzZiLkw')
       .then((result) => {
@@ -34,10 +36,10 @@ function ContactUs(){
       <div><FontAwesomeIcon icon ={faMobile} className='me-4'/>+20 0122244444</div>
       </div>
       <div className='text-start '> 
-        <a href="#" className='link-dark link-opacity-50-hover'><FontAwesomeIcon icon={faTwitter} className='me-4' /></a>
-        <a href="#"  className='link-dark link-opacity-50-hover'><FontAwesomeIcon icon={faFacebook} className='me-4'/></a>
-        <a href="#"  className='link-dark link-opacity-50-hover'><FontAwesomeIcon icon={faInstagram} className='me-4' /></a>
-        <a href="#"  className='link-dark link-opacity-50-hover'> <FontAwesomeIcon icon={faLinkedin } className='me-4'/></a>
+        <a href="#" ><FontAwesomeIcon icon={faTwitter} className='me-4 myIcon' /></a>
+        <a href="#" ><FontAwesomeIcon icon={faFacebook} className='me-4 myIcon'/></a>
+        <a href="#" ><FontAwesomeIcon icon={faInstagram} className='me-4 myIcon' /></a>
+        <a href="#" > <FontAwesomeIcon icon={faLinkedin } className='me-4 myIcon'/></a>
       
       </div>
     </div>
@@ -47,7 +49,7 @@ function ContactUs(){
 
     <div className="container col-6">
     <form ref ={form} onSubmit={sendEmail}>
-   <h5 className='text-start'>Leave us a message</h5>     
+   <h4 className='text-start'>Leave us a message</h4>     
   <div >
     <input type="text" className="form-control my-5" placeholder='Full Name' name='userName' required/>
   </div>
@@ -57,7 +59,7 @@ function ContactUs(){
   <div >
     <textarea className="form-control my-5" name='userMessage' rows={5} placeholder='Your message' required></textarea>
   </div>
-  <button type="submit" className="btn btn-primary" style ={{width:100+'%'}}>Submit</button>
+  <button type="submit"  >Submit</button>
 
 </form>
     </div>

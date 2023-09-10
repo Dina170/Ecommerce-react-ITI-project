@@ -1,5 +1,4 @@
-import { createContext, useContext, useState} from "react";
-/* import products from '../assets/products.json' */
+import { createContext, useContext, useEffect, useState} from "react";
 import { ProductContext } from "./product-context";
 
 
@@ -18,7 +17,13 @@ export const ShopContextProvider =(props) =>{
     })
     return cart
 }
-   let [cartItems ,setCartItems] =useState(getDefaultCart())
+   let [cartItems ,setCartItems] =useState([])
+
+   useEffect(
+    ()=>{
+        if(products.length >0){
+        setCartItems(getDefaultCart())} },
+    [products])
 
    const getTotalCartAmount=()=>{
     let total =0
@@ -32,11 +37,11 @@ export const ShopContextProvider =(props) =>{
    }
 
    const addToCart =(itemId)=>{
-    setCartItems({...cartItems ,[itemId] :cartItems[itemId] +1})
+    setCartItems((prev)=>({...prev ,[itemId] :prev[itemId]+1}))
    }
 
    const removeFromCart =(itemId)=>{
-    setCartItems({...cartItems ,[itemId] :cartItems[itemId]-1})
+    setCartItems((prev)=>({...prev ,[itemId] :prev[itemId]-1}))
    }
 
    const updateAmount=(amount ,id)=>{

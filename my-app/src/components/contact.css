@@ -1,0 +1,20 @@
+body{
+    color:  #0f2c59;
+}
+
+button {
+    background-color: #0f2c59;
+    height: 50px;
+    width: 100%;
+    color: #dac0a3;
+    font-size: 30px;
+    border-radius: 10px;
+}
+
+.myIcon{
+    color: #0f2c59 ;
+    font-size: 25px;
+}
+.myIcon :hover{
+    opacity: 0.5;
+}
