@@ -2,11 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
-
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
   const [loggedInUser,setLoggedInUser] = useState( JSON.parse(localStorage.getItem("registeredUsers")));
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
     setLoggedInUser(null);
+    localStorage.setItem("mode", null);
+
   }
 
   return (
@@ -55,9 +57,11 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/Dashboard">
-                Dashboard
-              </Link>
+              {isAdmin && (
+            <Link  className="nav-link" to="/admin"> 
+            Dashboard
+            </Link>
+             )}
             </li>
             <li className="nav-item">
             {!loggedInUser ?  (

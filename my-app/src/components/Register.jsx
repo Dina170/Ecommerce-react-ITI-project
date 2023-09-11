@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import {Link, useNavigate } from'react-router-dom'
-/* import { FaUser, FaLock ,FaPhone, FaEnvelope } from 'react-icons/fa'; */
+import { FaUser, FaLock ,FaPhone, FaEnvelope } from 'react-icons/fa';
 
 import './Register.css'
 
 const Register = () => {
-    let navigate =useNavigate();
+  let navigate  = useNavigate();
     const initialValues = {
      username: "",
      email:"",
@@ -29,6 +29,13 @@ const Register = () => {
     localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
     localStorage.setItem("mode" ,"registerd")
     // setFormValues(initialValues);
+
+     // Check if the user is an admin
+  if (newUser.username === "admin" && newUser.password === "adminpass") {
+    localStorage.setItem("isAdmin", true);
+  } else {
+    localStorage.setItem("isAdmin", false);
+  }
     setFormErrors(validate(formValues));
     setIsSubmit(true);
     };
@@ -42,13 +49,8 @@ const Register = () => {
     useEffect(() => {
       if (Object.keys(formErrors).length === 0 && isSubmit) {
         setTimeout(() => {
-          if(localStorage.getItem('returnToCart')){
-            localStorage.setItem('returnToCart' ,'false')
-            navigate("/cart");
-          }
-          else{
+          // window.location.href = "/"; // Redirect to the home page
           navigate("/");
-          }
         }, 1500);
       }
     }, [formErrors,isSubmit]);
@@ -103,7 +105,7 @@ const Register = () => {
           onChange={handleChange}
           style={{ borderBottom: formErrors.username? "2px solid red" : null}}
         />
-        {/*  <FaUser className="icon" /> */}
+         <FaUser className="icon" />
 
       </div>
       <p className="text-danger">{formErrors.username}</p>
@@ -117,7 +119,7 @@ const Register = () => {
               onChange={handleChange}
               style={{ borderBottom: formErrors.email ? "2px solid red" : null}}
             />
-      {/*   <FaEnvelope className="icon" /> */}
+        <FaEnvelope className="icon" />
 
       </div>
       <p className="text-danger">{formErrors.email}</p>
@@ -131,7 +133,7 @@ const Register = () => {
               onChange={handleChange}
               style={{ borderBottom: formErrors.phone ? "2px solid red" : null}}
             />
-          {/*   <FaPhone className="icon" /> */}
+            <FaPhone className="icon" />
       </div>
       <p className="text-danger">{formErrors.phone}</p>
                   
@@ -145,7 +147,7 @@ const Register = () => {
           onChange={handleChange}
           style={{ borderBottom: formErrors.password ? "2px solid red" : null}}
         />
-       {/*  <FaLock className="icon" /> */}
+        <FaLock className="icon" />
       </div>
       <p className="text-danger">{formErrors.password}</p>
       
