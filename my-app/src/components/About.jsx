@@ -1,11 +1,14 @@
 import React from 'react'
-import NavBar from './NavBar'
-
+import Navbar from './Navbar'
+import './About.css'
+import Footer from './Footer'
 
 const AboutPage = () => {
   return (
     <>
-    <NavBar/>
+    
+    <div className='body'>
+    <Navbar/>
       <div className="container my-3 py-3">
         <h1 className="text-center">About Us</h1>
         <hr />
@@ -29,7 +32,7 @@ const AboutPage = () => {
         <div className="row">
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://img.freepik.com/free-photo/young-handsome-man-choosing-clothes-shop_1303-19722.jpg?w=740&t=st=1694395163~exp=1694395763~hmac=2da694494039cfb2c2ed4deafec0b7c1f0a8407f548fc205fb4fd7da99eb8947" alt="" height={160} />
               <div className="card-body">
                 <h5 className="card-title text-center">Mens's Clothing</h5>
               </div>
@@ -37,7 +40,7 @@ const AboutPage = () => {
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://img.freepik.com/free-photo/attractive-stylish-woman-choosing-apparel-clothing-store_285396-4622.jpg?w=740&t=st=1694395684~exp=1694396284~hmac=7e87ae78c1805c1805ae06c980b3445ec1491d00a74170d214206fd8d2956c88" alt="" height={160} />
               <div className="card-body">
                 <h5 className="card-title text-center">Women's Clothing</h5>
               </div>
@@ -45,7 +48,7 @@ const AboutPage = () => {
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/1927259/pexels-photo-1927259.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://img.freepik.com/free-photo/women-s-day-still-life-with-makeup-jewelry_23-2149263166.jpg?w=740&t=st=1694396189~exp=1694396789~hmac=ef8682dcfe5c8c056c1065c754c3b4fd9ee7f3853d10c8dbf3c1a0e5f8645dde" alt="" height={160} />
               <div className="card-body">
                 <h5 className="card-title text-center">Jewelery</h5>
               </div>
@@ -61,7 +64,8 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
-   
+      <Footer/>
+      </div>
     </>
   )
 }
