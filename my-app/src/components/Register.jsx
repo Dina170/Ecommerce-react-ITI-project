@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import {Link } from'react-router-dom'
-import { FaUser, FaLock ,FaPhone, FaEnvelope } from 'react-icons/fa';
+import {Link, useNavigate } from'react-router-dom'
+/* import { FaUser, FaLock ,FaPhone, FaEnvelope } from 'react-icons/fa'; */
 
 import './Register.css'
 
 const Register = () => {
+    let navigate =useNavigate();
     const initialValues = {
      username: "",
      email:"",
@@ -26,6 +27,7 @@ const Register = () => {
     const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
     registeredUsers.push(newUser);
     localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+    localStorage.setItem("mode" ,"registerd")
     // setFormValues(initialValues);
     setFormErrors(validate(formValues));
     setIsSubmit(true);
@@ -40,7 +42,8 @@ const Register = () => {
     useEffect(() => {
       if (Object.keys(formErrors).length === 0 && isSubmit) {
         setTimeout(() => {
-          window.location.href = "/"; // Redirect to the home page
+          /* window.location.href = "/"; // Redirect to the home page */
+          navigate("/");
         }, 1500);
       }
     }, [formErrors,isSubmit]);
@@ -95,7 +98,7 @@ const Register = () => {
           onChange={handleChange}
           style={{ borderBottom: formErrors.username? "2px solid red" : null}}
         />
-         <FaUser className="icon" />
+        {/*  <FaUser className="icon" /> */}
 
       </div>
       <p className="text-danger">{formErrors.username}</p>
@@ -109,22 +112,21 @@ const Register = () => {
               onChange={handleChange}
               style={{ borderBottom: formErrors.email ? "2px solid red" : null}}
             />
-        <FaEnvelope className="icon" />
+      {/*   <FaEnvelope className="icon" /> */}
 
       </div>
       <p className="text-danger">{formErrors.email}</p>
 
       <div className="input-box">
             <input
-            className="form-control"
-              type="text"
-              name="Phone"
-              pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+              type="tel"
+              name="phone"
               placeholder="Phone Number"
               value={formValues.phone}
               onChange={handleChange}
               style={{ borderBottom: formErrors.phone ? "2px solid red" : null}}
             />
+          {/*   <FaPhone className="icon" /> */}
       </div>
       <p className="text-danger">{formErrors.phone}</p>
                   
@@ -138,7 +140,7 @@ const Register = () => {
           onChange={handleChange}
           style={{ borderBottom: formErrors.password ? "2px solid red" : null}}
         />
-        <FaLock className="icon" />
+       {/*  <FaLock className="icon" /> */}
       </div>
       <p className="text-danger">{formErrors.password}</p>
       

@@ -1,32 +1,63 @@
 import { useState, useEffect } from "react";
-import { Link  } from "react-router-dom";
-import { FaUser, FaLock } from 'react-icons/fa';
+import { Link, useNavigate  } from "react-router-dom";
+/* import { FaUser, FaLock } from 'react-icons/fa'; */
 import './Login.css';
 
 const Login = () => {
-    const initialValues = {
-     username: "",
-     password: "" 
-    };
-    const [formValues, setFormValues] = useState(initialValues);
-    const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormValues({ ...formValues, [name]: value });
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      setFormErrors(validate(formValues));
+  let navigate  = useNavigate();
+  const initialValues = {
+    username: "",
+    password: "",
+    rememberMe: false
+  };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === "checkbox" ? checked : value;
+    setFormValues({ ...formValues, [name]: inputValue });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    if (Object.keys(formErrors).length === 0) {
+      const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+      const user = registeredUsers.find(
+        (u) => u.username === formValues.username && u.password === formValues.password
+      );
+      if (user) {
+        localStorage.setItem("mode" ,"registerd");
+      if (formValues.rememberMe) {
+        localStorage.setItem("loggedInUser", JSON.stringify(formValues));
+      } else {
+        localStorage.removeItem("loggedInUser");
+      }
       setIsSubmit(true);
-    };
+    }
+    else {
+      setFormErrors({ username: "Invalid username or password" });
+    }
+   
+}
+  }
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) {
+      setFormValues(JSON.parse(storedUser));
+    }
+  }, []);
+  
   
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       setTimeout(() => {
-        window.location.href = "/"; // Redirect to the home page
+        /* window.location.href = "/"; // Redirect to the home page */
+        navigate("/");
       }, 1500);
     }
   }, [formErrors,isSubmit]);
@@ -71,7 +102,7 @@ const Login = () => {
                       borderBottom: formErrors.username ? "2px solid red" : null
                     }}
                   />
-                  <FaUser className="icon" />
+                {/*   <FaUser className="icon" /> */}
                 </div>
                 <p className="text-danger">{formErrors.username}</p>
                 
@@ -86,7 +117,7 @@ const Login = () => {
                       borderBottom: formErrors.password ? "2px solid red" : null
                     }}
                   />
-                <FaLock className="icon" />
+              {/*   <FaLock className="icon" /> */}
                 </div>
                 <p className="text-danger">{formErrors.password}</p>
                 
