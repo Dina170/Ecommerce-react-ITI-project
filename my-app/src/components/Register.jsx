@@ -48,7 +48,13 @@ const Register = () => {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       setTimeout(() => {
+        if(localStorage.getItem('returnToCart')){
+          localStorage.setItem('returnToCart' ,'false')
+          navigate("/cart");
+        }
+        else{
         navigate("/");
+        }
       }, 1500);
     }
   }, [formErrors, isSubmit]);

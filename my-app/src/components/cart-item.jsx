@@ -12,8 +12,8 @@ let CartItem = (props) => {
     <div className="cartItem">
       <img src={image} alt="product" />
       <div className="description">
-        <div>{category}</div>
-        <div>{title}</div>
+        <div> <b>{category}</b></div>
+        <div>{title.split(" ").slice(0, 3).join(" ")}</div>
         <div>Total price :$ {price * cartItems[id]}</div>
         <div className="countHandler">
           <button onClick={() => addToCart(id)}>+</button>
