@@ -1,12 +1,14 @@
-
-
+.mycart {
+  background-color: #f1e5d9;
+  height: calc(100vh - 100px);
+}
 
 .cart {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  align-items:flex-start;
+  align-items: flex-start;
 }
 
 .cartItem {
@@ -14,13 +16,13 @@
   height: 300px;
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
   justify-content: space-evenly;
-  box-shadow: 0px 3px 15px #0f2c59 ;
+  box-shadow: 0px 3px 15px #0f2c59;
   border-radius: 25px;
   margin: 30px;
   background-color: white;
-  color:#0f2c59 ;
+  color: #0f2c59;
 }
 
 .cartItem img {
@@ -29,10 +31,9 @@
 }
 
 .cartItem .description {
-
 }
 
-.countHandler{
+.countHandler {
   margin-top: 5px;
 }
 .countHandler input {
@@ -40,14 +41,14 @@
   width: 60px;
   text-align: center;
   font-weight: bolder;
-  color:#0f2c59;
-  background-color:#f8f0e5;
+  color: #0f2c59;
+  background-color: #f8f0e5;
 }
 
 .countHandler button {
   width: 30px;
   height: 30px;
-  background-color:#0f2c59 ;
+  background-color: #0f2c59;
   color: #dac0a3;
   font-weight: bold;
   text-align: center;
@@ -55,7 +56,7 @@
   border-radius: 5px;
 }
 
-.btnFooter button{
+.btnFooter button {
   background-color: #0f2c59;
   margin: 10px;
   height: 50px;
@@ -65,13 +66,12 @@
   font-weight: bold;
   border-radius: 10px;
   border: none;
-  box-shadow: 0px 3px 15px #f8f0e5
+  box-shadow: 0px 3px 15px #f8f0e5;
 }
 
-.disabledbtn{
+.disabledbtn {
   opacity: 0.5;
 }
-.emptyCart{
+.emptyCart {
   margin-top: 10px;
- 
 }

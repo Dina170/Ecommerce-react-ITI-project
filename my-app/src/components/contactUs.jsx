@@ -72,7 +72,6 @@ function ContactUs() {
                 <FontAwesomeIcon icon={faInstagram} className="me-4 myIcon" />
               </a>
               <a href="#">
-                {" "}
                 <FontAwesomeIcon icon={faLinkedin} className="me-4 myIcon" />
               </a>
             </div>
