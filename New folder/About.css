@@ -1,0 +1,18 @@
+*{
+   
+    font-family: 'Poppins',sans-serif;
+}
+.body{
+   
+    justify-content: center;
+    align-items: center;
+    background-color: #faf8f5;
+}
+
+.text-center{
+    color:#0f2c59;
+}
+.card-body h5{
+    font-size: 30px;
+    color:#0f2c59;
+}

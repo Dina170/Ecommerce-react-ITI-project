@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link  } from "react-router-dom";
-import { FaUser, FaLock } from 'react-icons/fa';
+import { Link, useNavigate  } from "react-router-dom";
+/* import { FaUser, FaLock } from 'react-icons/fa'; */
 import './Login.css';
 
 const Login = () => {
+  let navigate  = useNavigate();
   const initialValues = {
     username: "",
     password: "",
@@ -29,6 +30,7 @@ const Login = () => {
         (u) => u.username === formValues.username && u.password === formValues.password
       );
       if (user) {
+        localStorage.setItem("mode" ,"registerd");
       if (formValues.rememberMe) {
         localStorage.setItem("loggedInUser", JSON.stringify(formValues));
       } else {
@@ -54,7 +56,13 @@ const Login = () => {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       setTimeout(() => {
-        window.location.href = "/"; // Redirect to the home page
+        if(localStorage.getItem('returnToCart')){
+          localStorage.setItem('returnToCart' ,'false')
+          navigate("/cart");
+        }
+        else{
+        navigate("/");
+        }
       }, 1500);
     }
   }, [formErrors,isSubmit]);
@@ -99,7 +107,7 @@ const Login = () => {
                       borderBottom: formErrors.username ? "2px solid red" : null
                     }}
                   />
-                  <FaUser className="icon" />
+                {/*   <FaUser className="icon" /> */}
                 </div>
                 <p className="text-danger">{formErrors.username}</p>
                 
@@ -114,7 +122,7 @@ const Login = () => {
                       borderBottom: formErrors.password ? "2px solid red" : null
                     }}
                   />
-                <FaLock className="icon" />
+              {/*   <FaLock className="icon" /> */}
                 </div>
                 <p className="text-danger">{formErrors.password}</p>
                 
