@@ -126,6 +126,36 @@ const Login = () => {
               <p className="text-danger">{formErrors.password}</p>
 
               <div className="Remember-me">
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="username"
+                  value={formValues.username}
+                  onChange={handleChange}
+                  style={{
+                    borderBottom: formErrors.username ? "2px solid red" : null,
+                  }}
+                />
+                <FaUser className="icon" />
+              </div>
+              <p className="text-danger">{formErrors.username}</p>
+
+              <div className="input-box">
+                <input
+                  type="password"
+                  name="password"
+                  placeholder="password"
+                  value={formValues.password}
+                  onChange={handleChange}
+                  style={{
+                    borderBottom: formErrors.password ? "2px solid red" : null,
+                  }}
+                />
+                <FaLock className="icon" />
+              </div>
+              <p className="text-danger">{formErrors.password}</p>
+
+              <div className="Remember-me">
                 <label>
                   <input
                     type="checkbox"
