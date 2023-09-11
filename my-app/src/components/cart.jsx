@@ -85,7 +85,7 @@ function Cart() {
               checkout();
               navigate("/");}
               else{
-                localStorage.setItem('returnToCart' ,true);
+                localStorage.setItem('returnToCart' ,'true');
                 navigate("/login")
               }
             }}
