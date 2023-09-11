@@ -22,7 +22,7 @@ function Cart() {
       if(cartItems[product.id] >0){
         let obj ={};
         obj.id =product.id;
-        obj.title =product.title;
+        obj.title =product.title.split(" ").slice(0, 3).join(" ");
         obj.quantity =cartItems[product.id];
         obj.price = product.price * cartItems[product.id];
         receipt.push(obj);
@@ -33,8 +33,9 @@ function Cart() {
   }
   let sendConfirmation =function (){
     let dataSent = {
-      userName : "",
-      userEmail :"" ,
+    
+      userName : localStorage.getItem("currentUserName"),
+      userEmail :localStorage.getItem("currentUserEmail") ,
       receipt : JSON.stringify(makeReceipt())
     }
     emailjs.send('service_0kyj6bk', 'template_v7u402a', dataSent, 'IH3VizxuFCrzZiLkw')

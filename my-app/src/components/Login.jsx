@@ -33,6 +33,8 @@ const Login = () => {
       );
       if (user) {
         localStorage.setItem("mode", "registerd");
+        localStorage.setItem("currentUserName" ,user.username)
+        localStorage.setItem("currentUserEmail" ,user.email)
         if (formValues.rememberMe) {
           localStorage.setItem("loggedInUser", JSON.stringify(formValues));
         } else {

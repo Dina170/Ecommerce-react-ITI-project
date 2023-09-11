@@ -29,6 +29,8 @@ const Register = () => {
     registeredUsers.push(newUser);
     localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
     localStorage.setItem("mode", "registerd");
+    localStorage.setItem("currentUserName" ,formValues.username)
+    localStorage.setItem("currentUserEmail" ,formValues.email)
 
     if (newUser.username === "admin" && newUser.password === "adminpass") {
       localStorage.setItem("isAdmin", true);
