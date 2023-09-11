@@ -1,6 +1,7 @@
 import React, { useEffect, useState} from "react";
 import {useParams ,Link} from 'react-router-dom';
 import Product from "./Product";
+import './ProductDetails.css'
 //import {ShopContext} from "../context/shop-context";
 
 
@@ -8,15 +9,12 @@ import Product from "./Product";
 function ProductDetails(){
    const api_url="https://dummyjson.com/products";
     const[product,setProduct]=useState({})
-   // let { addToCart} =useContext(ShopContext)
 
 
-    //usrparams دى هوك جايه من باكدج الراوتينج عشان تساعدنى اتعامل مع البارامتر اللى بتتحط فى يوارال
     const params= useParams();
     console.log(params);
 
     useEffect(()=>{
-        //عشان يجيب البرودكت id بتاعى
         fetch(`${api_url}/${params.ProductId}`)
         .then((res)=>res.json())
         .then((product)=>setProduct(product))
@@ -25,16 +23,20 @@ function ProductDetails(){
     
     return(
        <>
+       <div className="body">
         <Product product={product} showButton={false}/>
         <button
-        className="btn btn-outline-dark"
+        className="btn1"
         // onClick={() => addToCart(Product)}
         >
             Add to Cart
         </button>
-        <Link to="/" className="btn btn-dark m-3">
+        <button className="btn2  mb-3 mx-3">
+        <Link to="/"  className="link">
             Go to Cart
         </Link>
+        </button>
+        </div>
       </>
     )
 }
