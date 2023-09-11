@@ -1,6 +1,14 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
+
+  const [loggedInUser,setLoggedInUser] = useState( JSON.parse(localStorage.getItem("registeredUsers")));
+  const handleLogout = () => {
+    localStorage.removeItem("loggedInUser");
+    setLoggedInUser(null);
+  }
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
@@ -52,9 +60,13 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                login
-              </Link>
+            {!loggedInUser ?  (
+               <Link className="nav-link" to="/Login">
+               Login
+             </Link>
+              ) : (
+            <button onClick={handleLogout}>Logout</button>
+          )}
             </li>
           </ul>
         </div>
