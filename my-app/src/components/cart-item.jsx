@@ -10,14 +10,16 @@ let CartItem = (props) => {
     useContext(ProductContext);
 
   return (
-    <div className="cartItem"> 
-      
-        <img src={image} alt="product" />
-        <div className="description">
+    <div className="cartItem">
+      <div>
+        <div>
+          <img src={image} alt="product" />
+        </div>
         <div>{category}</div>
         <div>{title}</div>
         <div>Total price :$ {price * cartItems[id]}</div>
-        <div className="countHandler">
+      </div>
+      <div>
         <button onClick={() => addToCart(id)}>+</button>
         <input
           value={cartItems[id]}
@@ -26,7 +28,6 @@ let CartItem = (props) => {
           }}
         />
         <button onClick={() => removeFromCart(id)}>-</button>
-      </div>
       </div>
     </div>
   );

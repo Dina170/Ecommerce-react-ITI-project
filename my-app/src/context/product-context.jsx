@@ -21,19 +21,26 @@ export function ProductContextProvider(props){
     };
 
     const getCategories = () => {
-      fetch(`${api_url}/categories`)
+    fetch(`${api_url}/categories`)
         .then((res) => res.json())
         .then((data) => {
-          const updatedCategories = data.map((category) => ({
-            categoryName: category,
-            description: "predefined",
-            status: "0",
-          }));
-          setCategories(updatedCategories);
-          console.log("categories in context", updatedCategories);
+            //console.log("prod in getcat", products);
+            //let tmp = [];
+            for (let i = 0; i < data.length; i++) {
+              let c = {
+                categoryName: data[i],
+                description: "predefined",
+                status: "0",
+                // products.filter((p) => p.category === data[i]).length,
+            };
+            categories.push(c);
+            }
+            //console.log("tmp", tmp);
+            setCategories(categories);
+            console.log("cats", categories);
         });
     };
-  
+
     useEffect(() => {
         getProducts();
         getCategories();
