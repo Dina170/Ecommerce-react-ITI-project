@@ -10,6 +10,7 @@ export default function Navbar() {
   );
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
+    localStorage.setItem('returnToCart' ,false)
     setLoggedInUser(null);
     localStorage.setItem("mode", null);
   };

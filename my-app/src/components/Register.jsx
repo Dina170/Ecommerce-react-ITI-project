@@ -51,7 +51,8 @@ const Register = () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       setTimeout(() => {
         if(localStorage.getItem('returnToCart')){
-          localStorage.setItem('returnToCart' ,'false')
+          
+          localStorage.setItem('returnToCart' ,false)
           navigate("/cart");
         }
         else{

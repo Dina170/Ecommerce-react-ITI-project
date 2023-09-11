@@ -38,6 +38,7 @@ function Cart() {
       userEmail :localStorage.getItem("currentUserEmail") ,
       receipt : JSON.stringify(makeReceipt())
     }
+    console.log(localStorage.getItem("currentUserEmail"))
     emailjs.send('service_0kyj6bk', 'template_v7u402a', dataSent, 'IH3VizxuFCrzZiLkw')
       .then((result) => {
           console.log(result.text);
@@ -84,7 +85,7 @@ function Cart() {
               checkout();
               navigate("/");}
               else{
-                localStorage.setItem('returnToCart' ,'true');
+                localStorage.setItem('returnToCart' ,true);
                 navigate("/login")
               }
             }}
