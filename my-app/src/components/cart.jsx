@@ -11,7 +11,6 @@ import emptyCart from '../images/empty.jpg'
 import emailjs from '@emailjs/browser';
 
 function Cart() {
-  /*  let [productsStored ,setProductsStored] =useState(products) */
   const { products, setProducts } = useContext(ProductContext);
   let { cartItems, getTotalCartAmount, checkout } = useContext(ProductContext);
   let totalAmount = getTotalCartAmount();
@@ -84,7 +83,8 @@ function Cart() {
               checkout();
               navigate("/");}
               else{
-                navigate("/Register")
+                localStorage.setItem('returnToCart' ,'true');
+                navigate("/login")
               }
             }}
             disabled ={totalAmount ===0}
