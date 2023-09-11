@@ -1,83 +1,63 @@
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFaceLaughWink,
+  faGaugeSimpleHigh,
+  faTable,
+  faPenToSquare,
+} from "@fortawesome/free-solid-svg-icons";
 
 function Sidebar() {
   return (
     <ul
-      className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+      className="navbar-nav bg-gradient-primary sidebar sidebar-dark"
       id="accordionSidebar"
     >
-      {/* <!-- Sidebar - Brand --> */}
       <Link
         className="sidebar-brand d-flex align-items-center justify-content-center"
         to="/Dashboard"
       >
-        <div className="sidebar-brand-icon rotate-n-15">
-          <i className="fas fa-laugh-wink"></i>
+        <div className="">
+          <FontAwesomeIcon icon={faFaceLaughWink} />
         </div>
-        <div className="sidebar-brand-text mx-3">Admin</div>
+        <div className="mx-2">Admin</div>
       </Link>
-
-      {/* <!-- Divider --> */}
       <hr className="sidebar-divider my-0" />
-
-      {/* <!-- Nav Item - Dashboard --> */}
       <li className="nav-item active">
         <Link className="nav-link" to="/Dashboard">
-          <i className="fas fa-fw fa-tachometer-alt"></i>
+          <FontAwesomeIcon icon={faGaugeSimpleHigh} className="me-2" />
           <span>Dashboard</span>
         </Link>
       </li>
-
-      {/* <!-- Divider --> */}
       <hr className="sidebar-divider" />
-
-      {/* <!-- Heading --> */}
       <div className="sidebar-heading">Products</div>
-
-      {/* <!-- Nav Item - Pages Collapse Menu --> */}
-
-      {/* <!-- Nav Item - Charts --> */}
-      <li className="nav-item">
-        <a className="nav-link" href="charts.html">
-          <i className="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span>
-        </a>
-      </li>
-
-      {/* <!-- Nav Item - Tables --> */}
       <li className="nav-item">
         <Link className="nav-link" to="/Dashboard/ListProducts">
-          <i className="fas fa-fw fa-table"></i>
+          <FontAwesomeIcon icon={faTable} className="me-2" />
           <span>Products Table</span>
         </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" to="/Dashboard/AddProduct">
-          <i className="fas fa-fw fa-table"></i>
+          <FontAwesomeIcon icon={faPenToSquare} className="me-2" />
           <span>Add a Product</span>
         </Link>
       </li>
 
       <hr className="sidebar-divider" />
-
-      {/* <!-- Heading --> */}
       <div className="sidebar-heading">Categories</div>
-
       <li className="nav-item">
         <Link className="nav-link" to="/Dashboard/ListCategories">
-          <i className="fas fa-fw fa-table"></i>
+          <FontAwesomeIcon icon={faTable} className="me-2" />
           <span>Categories Table</span>
         </Link>
       </li>
       <li className="nav-item">
         <Link className="nav-link" to="/Dashboard/AddCategory">
-          <i className="fas fa-fw fa-table"></i>
+          <FontAwesomeIcon icon={faPenToSquare} className="me-2" />
           <span>Add a Category</span>
         </Link>
       </li>
-
-      {/* <!-- Divider --> */}
-      <hr className="sidebar-divider d-none d-md-block" />
     </ul>
   );
 }

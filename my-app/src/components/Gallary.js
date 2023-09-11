@@ -1,12 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import Product from "./Product";
-//import productsdata from "../data.json";
 import { ProductContext } from "../Admin/ProductContext";
 
 export default function Gallary() {
-  //const api_url = "https://fakestoreapi.com/products";
-  const { products, setProducts } = useContext(ProductContext);
-  const { categories, setCategories } = useContext(ProductContext);
+  const { products } = useContext(ProductContext);
+  const { categories } = useContext(ProductContext);
   const [gallaryProd, setGallaryProd] = useState([]);
 
   const getAllProducts = () => {
@@ -19,6 +17,7 @@ export default function Gallary() {
     );
     console.log("productsInCat", productsInCat);
     setGallaryProd(productsInCat);
+    console.log("productssss", products);
   };
 
   useEffect(() => {
@@ -26,14 +25,15 @@ export default function Gallary() {
   }, []);
 
   return (
-    <>
-      <h1 className="text-center my-4">GALLARY</h1>
-      <div className="container">
+    <div id="gallary" className="py-5">
+      <h1 className="text-center special-heading">Gallery</h1>
+      <p className="mb-3">New stuff everyday</p>
+      <div className="container mt-3">
         <button
           onClick={() => {
             getAllProducts();
           }}
-          className="btn btn-outline-secondary m-2"
+          className="btn card-btn m-2"
         >
           All
         </button>
@@ -44,7 +44,7 @@ export default function Gallary() {
               onClick={() => {
                 getProductInCategory(cat.categoryName);
               }}
-              className="btn btn-outline-secondary m-2"
+              className="btn card-btn m-2"
             >
               {cat.categoryName}
             </button>
@@ -53,16 +53,16 @@ export default function Gallary() {
         <div className="row">
           {gallaryProd.map((product) => {
             return (
-              <div className="col-3 my-3" key={product.id}>
+              <div
+                className="col-12 col-md-6 col-lg-4 col-xxl-3  my-3"
+                key={product.id}
+              >
                 <Product product={product} showDetailsBtn={true} />
               </div>
             );
           })}
-          {/* {console.log("the products gallary", gallaryProd[5])}
-          {console.log("the products", products[0])}
-          {console.log("the products type ", typeof gallaryProd)} */}
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,0 +1,180 @@
+.nav-custom {
+  background-color: #f1e5d9;
+  color: #0f2c59;
+}
+
+.landing {
+  background-image: url("../../public/images/landing3.jpg");
+  background-repeat: no-repeat;
+  background-color: #f1e5d9;
+  background-attachment: fixed;
+  background-position-y: 100px;
+  position: relative;
+  background-size: cover;
+  height: calc(100vh - 100px);
+  width: 100%;
+}
+
+.landing button {
+  background-color: #ea7b7d;
+  position: absolute;
+  bottom: 20%;
+  right: 17%;
+  padding-left: 50px;
+  padding-right: 50px;
+  transition: 0.5s ease;
+}
+
+.landing button a {
+  text-decoration: none !important ;
+  color: gold;
+}
+
+.landing button:hover {
+  background-color: #ea7b7d;
+  transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .landing {
+    background-position-x: -100px;
+  }
+  .landing button {
+    background-color: #0f2c59;
+  }
+}
+
+.navbar-nav .nav-item .nav-link,
+.navbar-nav .nav-link {
+  color: #0f2c59;
+  margin-right: 10px;
+}
+
+nav ul li a,
+nav ul li a:after,
+nav ul li a:before {
+  transition: all 0.5s;
+}
+
+nav ul li a:hover {
+  color: #555;
+}
+
+nav.stroke ul li a,
+nav.fill ul li a {
+  position: relative;
+}
+nav.stroke ul li a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: ".";
+  color: transparent;
+  background: #0f2c59;
+  height: 1px;
+}
+nav.stroke ul li a:hover:after {
+  width: 100%;
+}
+
+#gallary {
+  background-color: #f1e5d9;
+}
+
+/* start special */
+.special-heading {
+  margin: 0;
+  color: #e4c09c !important;
+  font-size: 130px;
+  font-weight: 800;
+  letter-spacing: -4px;
+}
+
+.special-heading + p {
+  margin-top: -45px;
+  text-align: center;
+  font-size: 21px;
+  color: #0f2c59;
+  letter-spacing: -1px;
+}
+
+@media (max-width: 767px) {
+  .special-heading {
+    font-size: 60px;
+  }
+  .special-heading + p {
+    margin: -20px;
+  }
+}
+/* end special */
+
+.productCard {
+  background-color: #f1e5d9;
+  color: #0f2c59;
+}
+
+.img-container {
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom: 15px;
+}
+
+.mycard img {
+  padding: 10px;
+}
+
+.card-btn {
+  border: 1px solid #0f2c59 !important;
+  color: #0f2c59 !important;
+}
+
+.card-btn:hover {
+  background-color: #0f2c59 !important ;
+  color: #f1e5d9 !important;
+}
+/* ------------------------------------------------------------------ */
+/* start footer */
+
+.footer {
+  background-color: #19283f;
+}
+
+.footer .copyright > span {
+  color: #e4c09c;
+}
+
+.footer .copyright div span {
+  color: gold;
+}
+
+.footer ul {
+  line-height: 3;
+}
+
+.footer .contact ul svg {
+  width: 20px;
+  height: 20px;
+}
+
+.footer .contact button {
+  background-color: #e4c09c !important;
+  color: #0f2c59;
+  padding-left: 50px;
+  padding-right: 50px;
+  transition: 0.5s ease;
+}
+
+.contact button {
+  text-decoration: none !important ;
+  color: gold;
+}
+
+.contact button:hover {
+  background-color: #ea7b7d;
+  transform: scale(1.1);
+}
+/* end footer */

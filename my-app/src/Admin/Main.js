@@ -1,11 +1,12 @@
 import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import "./assets/css/sb-admin-2.min.css";
+import "./assets/css/admin.css";
 import ListProducts from "./ListProducts";
 import AddProduct from "./AddProduct";
 import ListCategory from "./ListCategory";
 import AddCategories from "./AddCategories";
+import Overview from "./overview";
 import { useContext, useState } from "react";
 import { ProductContext } from "./ProductContext";
 
@@ -38,8 +39,24 @@ function MainLayout() {
 
   const deleteProdHandler = (_index) => {
     if (window.confirm("Are You Sure?")) {
+      let deletedProductCat = categories.find(
+        (c) => c.categoryName === products[_index].category
+      );
       products.splice(_index, 1);
+      //console.log("prod after delete", products);
       setProducts(products);
+      const updatedCategories = categories.map((category) => {
+        if (category.categoryName === deletedProductCat.categoryName) {
+          return {
+            ...category,
+            status: category.status - 1,
+          };
+        }
+        return category;
+      });
+
+      setCategories(updatedCategories);
+      console.log("cats now", categories);
       _navigate("/Dashboard/ListProducts");
     }
   };
@@ -64,8 +81,15 @@ function MainLayout() {
 
   const deleteCatHandler = (_index) => {
     if (window.confirm("Are You Sure?")) {
-      categories.splice(_index, 1);
-      setCategories(categories);
+      if (
+        !products.find((p) => p.category === categories[_index].categoryName)
+      ) {
+        categories.splice(_index, 1);
+        //console.log("prod after delete", products);
+        setCategories(categories);
+      } else {
+        alert("Can not delete this category!");
+      }
       _navigate("/Dashboard/ListCategories");
     }
   };
@@ -78,6 +102,7 @@ function MainLayout() {
           <div id="content">
             <main>
               <Routes>
+                <Route path="/" element={<Overview />} />
                 <Route
                   path="/AddProduct"
                   element={

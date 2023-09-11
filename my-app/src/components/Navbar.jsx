@@ -1,19 +1,24 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navbar() {
-
-  const [loggedInUser,setLoggedInUser] = useState( JSON.parse(localStorage.getItem("registeredUsers")));
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
+  const [loggedInUser, setLoggedInUser] = useState(
+    JSON.parse(localStorage.getItem("registeredUsers"))
+  );
   const handleLogout = () => {
     localStorage.removeItem("loggedInUser");
     setLoggedInUser(null);
-  }
+    localStorage.setItem("mode", null);
+  };
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
+      <nav className="navbar navbar-expand-lg px-3 sticky-top nav-custom stroke">
         <Link className="navbar-brand" to="/">
-          Logo
+          <img src="./images/hnd.png" width="200px" alt="logo" />
         </Link>
         <button
           className="navbar-toggler"
@@ -28,47 +33,52 @@ export default function Navbar() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0 fw-bold ">
             <li className="nav-item">
               <Link className="nav-link" to="/">
-                Home
+                HOME
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/products">
-                Gallary
+                GALLERY
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/about">
-                About
+                ABOUT
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/contactUs">
-                Contact Us
+                CONTACT
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/cart">
-                My Cart
+                CART
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/Dashboard">
-                Dashboard
-              </Link>
-            </li>
-            <li className="nav-item">
-            {!loggedInUser ?  (
-               <Link className="nav-link" to="/Login">
-               Login
-             </Link>
-              ) : (
-            <button onClick={handleLogout}>Logout</button>
-          )}
+              {isAdmin && (
+                <Link className="nav-link" to="/Dashboard">
+                  Dashboard
+                </Link>
+              )}
             </li>
           </ul>
+          <div className="navbar-nav ms-auto mb-2 mb-lg-0 fw-bold">
+            {!loggedInUser ? (
+              <Link className="nav-link" to="/Login">
+                <FontAwesomeIcon className="me-1" icon={faRightToBracket} />
+                Login
+              </Link>
+            ) : (
+              <button className="nav-link" onClick={handleLogout}>
+                Logout
+              </button>
+            )}
+          </div>
         </div>
       </nav>
     </>

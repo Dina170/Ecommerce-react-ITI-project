@@ -1,27 +1,40 @@
 import { Link } from "react-router-dom";
 import { ProductContext } from "../Admin/ProductContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 export default function Product({ product, showDetailsBtn }) {
   const { addToCart } = useContext(ProductContext);
+
   return (
     <>
-      <div className="card">
-        <img src={product.image} className="card-img-top" alt={product.title} />
-        <div className="card-body">
-          <h5 className="card-title">{product.title}</h5>
+      <div className="mycard">
+        <div className="img-container">
+          <img
+            src={product.image}
+            width="300px"
+            height="300px"
+            className="rounded-img p-3"
+            alt={product.title}
+          />
+        </div>
+        <div className="productCard">
+          <h5 className="fw-bold">
+            {showDetailsBtn
+              ? product.title.split(" ").slice(0, 3).join(" ")
+              : product.title}
+          </h5>
           {!showDetailsBtn && (
             <p className="card-text">{product.description}</p>
           )}
           <p> Price: {product.price}$</p>
           {showDetailsBtn && (
-            <Link className="btn btn-primary me-2" to={`product/${product.id}`}>
+            <Link className="btn me-2 card-btn" to={`product/${product.id}`}>
               Details
             </Link>
           )}
           {showDetailsBtn && (
             <button
-              className="btn btn-primary"
+              className="btn card-btn"
               onClick={() => {
                 addToCart(product.id);
                 console.log("id", product.id);

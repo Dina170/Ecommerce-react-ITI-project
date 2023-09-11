@@ -5,7 +5,7 @@ export const ProductContext = React.createContext();
 export const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const api_url = "https://fakestoreapi.com/products";
+  const api_url = "https://fakestoreapi.com/products/";
 
   const getDefaultCart = () => {
     let cart = {};
@@ -50,7 +50,7 @@ export const ProductContextProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
-        //setCartItems(getDefaultCart());
+        console.log(data);
       });
     console.log("products in context", products);
   };
@@ -59,11 +59,14 @@ export const ProductContextProvider = ({ children }) => {
     fetch(`${api_url}/categories`)
       .then((res) => res.json())
       .then((data) => {
-        const updatedCategories = data.map((category) => ({
-          categoryName: category,
-          description: "predefined",
-          status: "0",
-        }));
+        const updatedCategories = data
+          .map((category, i) => ({
+            id: i + 1,
+            categoryName: category,
+            description: "predefined",
+            status: products.filter((p) => p.category === category).length,
+          }))
+          .slice(0, 6);
         setCategories(updatedCategories);
         console.log("categories in context", updatedCategories);
       });
@@ -71,10 +74,10 @@ export const ProductContextProvider = ({ children }) => {
 
   useEffect(() => {
     getProducts();
-    getCategories();
   }, []);
 
   useEffect(() => {
+    getCategories();
     if (products.length > 0) {
       setCartItems(getDefaultCart());
     }
