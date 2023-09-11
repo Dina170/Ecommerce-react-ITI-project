@@ -22,8 +22,13 @@ const Register = () => {
   
     const handleSubmit = (e) => {
       e.preventDefault();
-      setFormErrors(validate(formValues));
-      setIsSubmit(true);
+    const newUser = { ...formValues };
+    const registeredUsers = JSON.parse(localStorage.getItem("registeredUsers")) || [];
+    registeredUsers.push(newUser);
+    localStorage.setItem("registeredUsers", JSON.stringify(registeredUsers));
+    // setFormValues(initialValues);
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
     };
   
     useEffect(() => {
@@ -56,8 +61,8 @@ const Register = () => {
       }
       else if(values.phone.length<11){
         errors.phone = "Phone number must be equal 11 numbers";
-
       }
+
       if (!values.password) {
         errors.password = "Password is required";
       } else if (values.password.length < 4) {
@@ -111,15 +116,15 @@ const Register = () => {
 
       <div className="input-box">
             <input
+            className="form-control"
               type="text"
               name="Phone"
+              pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
               placeholder="Phone Number"
               value={formValues.phone}
               onChange={handleChange}
               style={{ borderBottom: formErrors.phone ? "2px solid red" : null}}
             />
-            <FaPhone className="icon" />
-
       </div>
       <p className="text-danger">{formErrors.phone}</p>
                   

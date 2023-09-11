@@ -4,40 +4,24 @@ import { FaUser, FaLock } from 'react-icons/fa';
 import './Login.css';
 
 const Login = () => {
-  const initialValues = {
-    username: "",
-    password: "",
-    rememberMe: false
-  };
-  const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState({});
-  const [isSubmit, setIsSubmit] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const inputValue = type === "checkbox" ? checked : value;
-    setFormValues({ ...formValues, [name]: inputValue });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormErrors(validate(formValues));
-    if (Object.keys(formErrors).length === 0) {
-      if (formValues.rememberMe) {
-        localStorage.setItem("loggedInUser", JSON.stringify(formValues));
-      } else {
-        localStorage.removeItem("loggedInUser");
-      }
+    const initialValues = {
+     username: "",
+     password: "" 
+    };
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormValues({ ...formValues, [name]: value });
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      setFormErrors(validate(formValues));
       setIsSubmit(true);
-    }
-  };
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("loggedInUser");
-    if (storedUser) {
-      setFormValues(JSON.parse(storedUser));
-    }
-  }, []);
+    };
   
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
