@@ -1,127 +1,143 @@
 import { useState, useEffect } from "react";
-/* import '../bootstrap.min.css' */
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
-import {Link}from'react-router-dom'
+import { Link  } from "react-router-dom";
+import { FaUser, FaLock } from 'react-icons/fa';
+import './Login.css';
 
 const Login = () => {
-    const initialValues = {
-     username: "",
-     password: "" 
-    };
-    const [formValues, setFormValues] = useState(initialValues);
-    const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormValues({ ...formValues, [name]: value });
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      setFormErrors(validate(formValues));
+  const initialValues = {
+    username: "",
+    password: "",
+    rememberMe: false
+  };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === "checkbox" ? checked : value;
+    setFormValues({ ...formValues, [name]: inputValue });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    if (Object.keys(formErrors).length === 0) {
+      if (formValues.rememberMe) {
+        localStorage.setItem("loggedInUser", JSON.stringify(formValues));
+      } else {
+        localStorage.removeItem("loggedInUser");
+      }
       setIsSubmit(true);
-    };
+    }
+  };
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) {
+      setFormValues(JSON.parse(storedUser));
+    }
+  }, []);
   
-    useEffect(() => {
-      if (Object.keys(formErrors).length === 0 && isSubmit) {
-        console.log(formValues);
-      }
-    }, [formErrors]);
-    
-    const validate = (values) => {
-      const errors = {};
-      if (!values.username) {
-        errors.username = "Username is required!";
-      }
-      if (!values.password) {
-        errors.password = "Password is required";
-      } else if (values.password.length < 4) {
-        errors.password = "Password must be more than 4 characters";
-      } else if (values.password.length > 10) {
-        errors.password = "Password cannot exceed more than 10 characters";
-      }
-      return errors;
-    };
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      setTimeout(() => {
+        window.location.href = "/"; // Redirect to the home page
+      }, 1500);
+    }
+  }, [formErrors,isSubmit]);
 
-   return(
+  const validate = (values) => {
+    const errors = {};
+    if (!values.username) {
+      errors.username = "Username is required!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required";
+    } else if (values.password.length < 4) {
+      errors.password = "Password must be more than 4 characters";
+    } else if (values.password.length > 10) {
+      errors.password = "Password cannot exceed more than 10 characters";
+    }
+    return errors;
+  };
+
+  return (
     <>
-    <div className="container d-flex justify-content-center align-items-center vh-100" >
-    <div className="col-lg-4">
+    <section>
     {Object.keys(formErrors).length === 0 && isSubmit ? (
-      <div className=" message success text-success h1"><b>Loged in successfully ✓</b></div>
-    ) : null}
-    <form onSubmit={handleSubmit}>
-    <div className="card">
-        <div className="card-header">
-            <h1>Login Form</h1>
-        </div>
-        <div className="card-body">
+            <div >
+              <h3 className="message-success">Logged in successfully ✓</h3>
+            </div>
+          ) : null}
+      <div className="wrapper ">
+        <span className="bg-animate"></span>
+        <div className="form-box login">
+          <form onSubmit={handleSubmit} action="#">
+                <h2>Login Form</h2>
+              
+                <div className="input-box">
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="username"
+                    value={formValues.username}
+                    onChange={handleChange}
+                    style={{
+                      borderBottom: formErrors.username ? "2px solid red" : null
+                    }}
+                  />
+                  <FaUser className="icon" />
+                </div>
+                <p className="text-danger">{formErrors.username}</p>
+                
+                <div className="input-box">
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="password"
+                    value={formValues.password}
+                    onChange={handleChange}
+                    style={{
+                      borderBottom: formErrors.password ? "2px solid red" : null
+                    }}
+                  />
+                <FaLock className="icon" />
+                </div>
+                <p className="text-danger">{formErrors.password}</p>
+                
+                <div className="Remember-me">
+                <label><input
+                    type="checkbox"
+                    name="rememberMe"
+                    checked={formValues.rememberMe}
+                    onChange={handleChange}
+                  />
+                  Remember me
+                  </label>
+                </div>
+                
+                <button className="btn" id="btn" type="submit">Login</button>
+                <div className="logreg-link">
+                  <p>
+                    Don't have an account ?{" "}
+                    <Link to="/Register"  className="link">
+                        Sign Up
+                    </Link>
+                  </p>
+                </div>
+              
+            </form>
+            </div>
+            <div className="info-text login">
+                    <h2>Welcome Back!</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+            </div>
+            </div>
+            </section>
+            </>
+          
+   );
+ }
 
-      <div className="form-group">
-        <label className="form-label">Username</label>
-        <input
-        className="form-control"
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formValues.username}
-          onChange={handleChange}
-          style={{ border: formErrors.username ? "2px solid red" : null}}
-        />
-      </div>
-      <p className="text-danger">{formErrors.username}</p>
-
-
-      <div className="form-group">
-        <label className="form-label">Password</label>
-        <input
-        className="form-control"
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formValues.password}
-          onChange={handleChange}
-          style={{ border: formErrors.password ? "2px solid red" : null}}
-
-        />
-      </div>
-      <p className="text-danger">{formErrors.password}</p>
-
-      <div className="form-group form-check mb-2">
-        <input
-          type="checkbox"
-          className="form-check-input"
-        />
-      <label className="form-check-label">Remember me</label>
-      </div>
-      
-      <button className="btn btn-success w-100">Login</button>
-      <div>
-      <label className="mx-auto my-4">
-      Don't have an account ?{" "}
-        <Link to="/Register" style={{ textDecoration: 'none' }}>
-        <span style={{ cursor: "pointer" }} className="text-danger">
-             <u>Sign Up</u>
-        </span>
-        </Link>
-      </label>
-      </div>
-
-      <div>
-      <label className="mx-auto my-4">
-      <Link to="/user/forget-password" style={{ textDecoration: 'none', color: 'red' }}>
-                            Do you forget password?        
-     </Link>
-      </label>
-      </div>
-  </div>
-  </div>
-  </form>
-  </div>
-</div>
-</>
-    );
-}
-
-export default Login;
+ export default Login;
